@@ -6,6 +6,10 @@ end
 
 #This is where I will mount other controllers with my keyword, 'use'
 
+use UsersController
+
+#^^ Every controller inheriting from AppController needs this route! 
+
 #Also in order to send PATCH and DELETE reqs I'll include - 
 #use Rack::MethodOverride (middleware!)
 
