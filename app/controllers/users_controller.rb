@@ -28,6 +28,7 @@ class UsersController < ApplicationController
     #the name coencides with the method in the form!
 
     get '/users/:id' do 
+        
         "Users Profile Page"
     end
 end
