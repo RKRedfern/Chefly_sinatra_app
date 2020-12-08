@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     
     get '/login' do 
-        erb :login
+        erb :'/users/login'
     end
     #^this route simply renders the login form
 
@@ -27,9 +27,30 @@ class UsersController < ApplicationController
     #^this route is what's going to collect or 'send' data to the params hash. 
     #the name coencides with the method in the form!
 
+    #SHOW
     get '/users/:id' do 
+        #find the user
+        @user = User.find_by(id: params[:id])
         
-        "Users Profile Page"
+        erb :'/users/show'
+    end
+
+    get '/signup' do 
+        erb :'/users/signup'
+    end
+
+    #NEW
+    post '/users' do
+        
+        @user = User.create(params)
+        session[:user_id] = @user.id
+        redirect "/users/#{@user.id}"
+    end
+
+    #LOGOUT
+    get '/logout' do 
+        session.clear
+        redirect '/'
     end
 end
 
