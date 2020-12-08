@@ -7,6 +7,7 @@ end
 #This is where I will mount other controllers with my keyword, 'use'
 
 use UsersController
+use PostsController
 
 #^^ Every controller inheriting from AppController needs this route! 
 
