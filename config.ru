@@ -9,11 +9,11 @@ use Rack::MethodOverride
 use UsersController
 use PostsController
 
-
+run ApplicationController
 
 #^^ Every controller inheriting from AppController needs this route! 
 
 #Also in order to send PATCH and DELETE reqs I'll include - 
 
 
-run ApplicationController
+

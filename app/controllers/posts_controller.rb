@@ -58,10 +58,6 @@ end
 
 
 
-    
-    
-    
-    
 
 
 #Every time a controller is created, you must plug it in in the config file
