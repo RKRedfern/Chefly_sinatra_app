@@ -2,6 +2,7 @@ class UsersController < ApplicationController
     
     get '/login' do 
         erb :'/users/login'
+
     end
     #^this route simply renders the login form
 
@@ -14,11 +15,14 @@ class UsersController < ApplicationController
             session[:user_id] = user.id
             #^because I already have the session hash and the user object has been authenticated, this adds a key:value pair to it. 
             #I want to keep track of this information because... 
+            flash[:message] = "Welcome Back, #{user.username}."
             redirect "/users/#{user.id}" 
         #redirect them to their profile (users show)
+
             
         else
             #show an error message
+            flash[:error] = "Incorrect Email/Password Combination. Try Again Or Go Back To Sign Up."
             redirect '/login'
         end
 
