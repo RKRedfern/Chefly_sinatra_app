@@ -20,19 +20,47 @@ class PostsController < ApplicationController
     
     
     get '/posts/:id' do
-        
         @post = Post.find(params[:id])
         erb :'/posts/show'
+    end   
         #I need an instance variable wherever I need to access an id and leverage the information it contains. 
         #it expands its scope so I can use it. 
 
-    end
     
-end
     
     #UPDATE
+    #edit button that takes us to the form to get the id
+    #render edit form
+    #patch method/route
+    
+    get '/posts/:id/edit' do
+        @post = Post.find(params[:id])
+        erb :'/posts/edit'
+        
+    end
+
+    patch '/posts/:id' do
+        @post = Post.find(params[:id])
+        @post.update(title: params[:title], image_url: params[:image_url], description: params[:description])
+        redirect "/posts/#{@post.id}"
+    end
 
     #DELETE
+
+    delete '/posts/:id' do
+        @post = Post.find(params[:id])
+        @post.destroy
+        redirect '/posts'
+    end
+
+end
+
+
+
+
+    
+    
+    
     
 
 
