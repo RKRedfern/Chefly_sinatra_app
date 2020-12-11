@@ -8,14 +8,35 @@ class PostsController < ApplicationController
 
     
     get '/posts/new' do
-        erb :'posts/new'
+        if logged_in?
+            erb :'posts/new'
+        else
+            flash[:error] = "You have to log in to do that, Chef."
+            redirect "/"
+        end
     end
 
-    post '/posts' do
-        @post = Post.create(title: params[:title], image_url: params[:image_url], 
-            description: params[:descrpition], user_id: current_user.id)
-            
+    # post '/posts' do
+    #     @post = Post.new(title: params[:title], image_url: params[:image_url], description: params[:descrpition], user_id: current_user.id)
+    #     if @post.save     
+    #         flash[:message] = "Post Created Successfully"
+    #         redirect "/posts/#{@post.id}"
+    #     else 
+    #         flash[:error] = "Please Fill Out All Fields"
+    #         redirect "/posts/new"
+    #     end
+    # end
+
+    
+    post "/posts" do 
+        @post = Post.new(title: params[:title], image_url: params[:image_url], description: params[:description], user_id: current_user.id)
+        if @post.save
+            flash[:message] = "Post successfully created!"
             redirect "/posts/#{@post.id}"
+        else
+            flash[:error] = "Error: #{@post.errors.full_messages.to_sentence}"
+            redirect 'posts/new'
+        end
     end
     
     

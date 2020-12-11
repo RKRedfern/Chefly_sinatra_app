@@ -2,7 +2,6 @@ class UsersController < ApplicationController
     
     get '/login' do 
         erb :'/users/login'
-
     end
     #^this route simply renders the login form
 
