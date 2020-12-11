@@ -56,8 +56,12 @@ class PostsController < ApplicationController
     
     get '/posts/:id/edit' do
         @post = Post.find(params[:id])
-        erb :'/posts/edit'
-        
+        if authorized_to_edit?(@post)
+            erb :'/posts/edit'
+        else 
+            flash[:error] = "That's not your mise en place, Jefe."
+            redirect '/posts'
+        end
     end
 
     patch '/posts/:id' do
